@@ -27,7 +27,7 @@ def get_job(request, id):
 
 def subscribe_job(request, id):
     form = JobApplyForm(request.POST)
-    applicant = CustomUser.objects.get(id=request.user.applicant.applicant_id)
+    applicant = Applicant.objects.get(applicant_id=request.user.applicant.applicant_id)
     subscriber = ApplicantsJobMap.objects.filter(applicant=applicant, job=id)
     if not subscriber:
         if request.method == 'POST':
@@ -109,7 +109,7 @@ def update(request, applicant_id):
 
 
 def status(request):
-    status_applicant = ApplicantsJobMap.objects.filter(applicant=request.user)
+    status_applicant = ApplicantsJobMap.objects.filter(applicant=request.user.applicant)
     myFilter = StatusFilter(request.GET, queryset=status_applicant)
     status_applicant = myFilter.qs
     context = {

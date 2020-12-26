@@ -29,7 +29,7 @@ class CustomUser(AbstractUser):
 
 
 class Company(models.Model):
-    company = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    company = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     profile_pic = models.ImageField(default="profile_pic.png", null=True, blank=True)
 
     def __str__(self):
@@ -41,7 +41,7 @@ class Company(models.Model):
 
 
 class Applicant(models.Model):
-    applicant = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    applicant = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     GENDER_MALE = 'Male'
     GENDER_FEMALE = 'Female'
     GENDER_CHOICES = [(GENDER_MALE, 'Male'), (GENDER_FEMALE, 'Female')]
