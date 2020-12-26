@@ -49,7 +49,7 @@ def add_job(request):
         form = JobForm(request.POST)
         if form.is_valid():
             job = form.save(commit=False)
-            job.creator = request.user
+            job.creator = request.user.company
             job.save()
             messages.success(request, 'Job is successfully added')
             return redirect('posted_job')
@@ -59,7 +59,7 @@ def add_job(request):
 
 
 def posted_jobs(request):
-    posted_job = Job.objects.filter(creator=request.user)
+    posted_job = Job.objects.filter(creator=request.user.company)
     return render(request, 'jobs/posted_job.html', {'posted_job': posted_job})
 
 

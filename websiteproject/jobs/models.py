@@ -1,5 +1,5 @@
 from django.db import models
-from account.models import CustomUser, Applicant
+from account.models import Company, Applicant
 STATUS_PENDING = 'pending'
 STATUS_ACCEPTED = 'accepted'
 STATUS_REJECTED = 'rejected'
@@ -23,11 +23,8 @@ class Job(models.Model):
     max_age = models.IntegerField()
     gender = models.CharField(max_length=20, default=GENDER_ALL, choices=GENDER_CHOICES)
     salary = models.IntegerField()
-    creator = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
+    creator = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
     objects = models.Manager()
-
-    def __self__(self):
-        return '{} {}'.format(self.creator, self.position_name)
 
     def __str__(self):
         return self.position_name

@@ -1,7 +1,29 @@
 from django.contrib import admin
 from account.models import CustomUser, Company, Applicant
 from django.contrib.auth.admin import UserAdmin
+from jobs.models import ApplicantsJobMap
 
+class CandidateInline(admin.TabularInline):
+    model = ApplicantsJobMap
+
+    def get_readonly_fields(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return ['job', 'status', 'feedback']
+
+class ApplicantsAdmin(admin.ModelAdmin):
+    inlines = (CandidateInline,)
+
+    def has_view_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_add_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_change_permission(self, request, obj=None):
+        return request.user.is_superuser
 
 class AccountAdmin(UserAdmin):
     list_display = ("email", "username", "date_joined", "last_login", "is_staff")
@@ -36,4 +58,4 @@ class AccountAdmin(UserAdmin):
 
 admin.site.register(CustomUser, AccountAdmin)
 admin.site.register(Company)
-admin.site.register(Applicant)
+admin.site.register(Applicant, ApplicantsAdmin)

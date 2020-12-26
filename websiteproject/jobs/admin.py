@@ -22,7 +22,7 @@ class JobAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return Job.objects.all()
         else:
-            return Job.objects.filter(creator=request.user)
+            return Job.objects.filter(creator=request.user.company)
 
     def get_list_display(self, request, *args, **kwargs):
         if request.user.is_superuser:
@@ -33,7 +33,7 @@ class JobAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if not obj.pk:
-            obj.creator = request.user
+            obj.creator = request.user.company
             obj.save()
 
 admin.site.register(Job, JobAdmin)
