@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+	.card {
+		background-color: black;
+		width: 100%;
+	}
+	.desc {
+		color: white;
+	}
+	.button {
+    	background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        margin: 9px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    .button1 {
+        background-color: transparent;
+        color: white;
+        border: 2px solid crimson;
+    }
+    .button1:hover {
+         background-color: crimson;
+         color: white;
+    }
+   	.profile-pic{
+		max-width: 200px;
+		max-height: 200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+	h3 {
+		margin-top: 200px;
+		margin-bottom: 45px;
+	}
+</style>
+
+<div id="content">
+    {% include 'jobs/messages.html' %}
+</div>
+
+<br>
+
+{% if request.user.get_applicant == True %}
+	<h3 style="text-align: center" class="desc">Account Profile</h3>
+	<div class="offset-md-3">
+		<div class="col-md-4">
+			<div class="card card-body">
+				<img class="profile-pic" src="{{request.user.applicant.get_profile_pic.url}}" >
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="card card-body">
+				<p class="desc">Name: {{ request.user.get_name }}</p>
+				<p class="desc">Email: {{ request.user.get_email }}</p>
+				<p class="desc">Username: {{ request.user.get_username }}</p>
+                <p class="desc">Age: {{ request.user.applicant.get_age }}</p>
+                <p class="desc">Gender: {{ request.user.applicant.get_gender }}</p>
+                <p class="desc">Mobile phone: {{ request.user.applicant.get_mobile_phone }}</p>
+                <p class="desc">City: {{ request.user.applicant.get_city }}</p>
+                <p class="desc">Relocate: {{ request.user.applicant.get_will_relocate }}</p>
+			</div>
+		</div>
+
+
+		<a class="button button1 mt-3" href="{% url 'reset_password' %}" role="button">Change password</a>
+
+		<a class="button button1 mt-3" href="{% url 'applicant_update' %}" role="button">Update profile</a>
+	{% else %}
+		<h3 style="text-align: center" class="desc">Account Profile</h3>
+		<div class="offset-md-3">
+			<div class="col-md-4">
+				<div class="card card-body">
+					<img class="profile-pic" src="{{request.user.company.get_profile_pic.url}}" >
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card card-body">
+					<p class="desc">Name: {{ request.user.get_name }}</p>
+					<p class="desc">Email: {{ request.user.get_email }}</p>
+					<p class="desc">Username: {{ request.user.get_username }}</p>
+				</div>
+			</div>
+
+			<a class="button button1" href="{% url 'reset_password' %}" role="button">Change password</a>
+
+			<a class="button button1" href="{% url 'company_update' %}" role="button">Update profile</a>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+
+
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+    })
+    setTimeout(function(){
+        if ($('#msg').length > 0) {
+            $('#msg').remove();
+        }
+    }, 2000)
+</script>
+{% endblock %}

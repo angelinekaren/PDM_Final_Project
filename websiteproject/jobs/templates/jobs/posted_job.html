@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .card-body {
+        background-color: rgb(255, 255, 255);
+        margin-bottom: 30px;
+    }
+</style>
+<div id="content">
+    {% include 'jobs/messages.html' %}
+</div>
+
+<div class="landing">
+    <div class="job-wrap">
+        <div class="job-inner">
+        </div>
+    </div>
+    <div class="job text-center mt-5">
+        <h2>JOB POSTED</h2>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <h2 class="text-white mx-5 mt-5 mb-5">Job Positions</h2>
+    <div class="mx-5 card card-body">
+        <table class="table table-sm">
+            <tr>
+                <th>Position</th>
+                <th>Company</th>
+            </tr>
+            {% for job in posted_job %}
+            <tr>
+                <td>{{ job.get_position_name }}</a></td>
+                <td>{{ job.get_company }}</td>
+                <td><a class='btn btn-success' href="/posted_jobs/{{ job.id }}" role="button">CHECK HERE</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+    })
+    setTimeout(function(){
+        if ($('#msg').length > 0) {
+            $('#msg').remove();
+        }
+    }, 2000)
+</script>
+{% endblock content %}

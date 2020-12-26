@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style type="text/css">
+    	body {
+			background-color: #d3dde3;
+		}
+        .card-login {
+            width: 400px;
+            height: 410px;
+            margin-top: 200px;
+			margin-bottom: auto;
+			background: #dadfe3;
+			justify-content: center;
+			padding: 10px;
+			box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+			border-radius: 10px;
+		}
+        .input-container {
+    		display: flex;
+  			width: 100%;
+  			margin-bottom: 15px;
+		}
+        .input-field {
+  			width: 100%;
+  			padding: 10px;
+  			outline: none;
+		}
+		.icon {
+  			padding: 10px;
+  			background: #373c3d;
+  			color: white;
+  			min-width: 40px;
+  			text-align: center;
+  			border-radius: 2px;
+		}
+        .btn:hover {
+			opacity: 1;
+			color: #fff;
+		}
+	</style>
+    <div class="container-fluid">
+        <div class="row justify-content-center h-100">
+			<div class="card card-login">
+		  		<div class="card-body">
+                    <div class="d-flex flex-column">
+                        <img class="mx-auto mt-4" src="{% static 'images/logo2.png' %}" alt="JobforYoulogo" width="280" height="75">
+                    </div>
+                    <h4 class="text-center mb-5">Update your account profile</h4>
+
+                    <form method="POST" enctype="multipart/form-data">
+
+				        {% csrf_token %}
+
+                        {{update_form.as_p}}
+
+                        <button class='btn btn-lg btn-dark btn-block mt-4'type="submit">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+    })
+
+</script>
+
+{% endblock content %}

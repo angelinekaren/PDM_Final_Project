@@ -1,0 +1,181 @@
+{% load static %}
+
+<header>
+    <div class="d-flex p-3 px-md-4 border-bottom mb-3 shadow-sm">
+        {% if request.user.is_authenticated %}
+            {% if request.user.get_applicant == True %}
+        <!-- PC devices -->
+            <div class="d-none d-md-flex flex-row my-auto flex-grow-1 align-items-center">
+                <img class="mx-auto mt-1" src="{% static 'images/logo.png' %}" alt="JobforYoulogo" width="280" height="50">
+                <div class="p-2 text-white">
+                    <div class="d-flex flex-row">
+                        <nav>
+                            <ul>
+                                <li><a class="mt-3 mx-5 text-white" href="{% url 'home' %}">HOME</a></li>
+                                <li><a class="mt-3 mx-5 text-white" href="{% url 'jobs_view' %}">JOBS</a></li>
+                                <li><a class="mt-3 mx-5 text-white" href="{% url 'status' %}">STATUS</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse flex-grow-1">
+                    <nav>
+                        <div class="dropdown dropleft">
+                            <div class="d-flex flex-row">
+                                <!-- account profile -->
+                                <div class="btn-group dropleft">
+                                    <img class="account-image rounded-circle m-auto d-block dropdown-toggle" id="id_profile_links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{request.user.applicant.get_profile_pic.url}}" alt="default account logo" width="35" height="35">
+                                    <div class="dropdown-menu" aria-labelledby="id_profile_links">
+                                        <a class="dropdown-item" href="{% url 'account_profile' %}">Account</a>
+                                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+            <!-- Mobile devices -->
+            <div class="d-flex d-md-none flex-column my-auto flex-grow-1 align-items-center">
+                <img class="mx-auto mt-1" src="{% static 'images/logo.png' %}" alt="JobforYoulogo" width="280" height="50">
+                <div class="p-2 text-white">
+                    <div class="d-flex flex-row">
+                        <nav>
+                            <ul>
+                            <li><a class="mt-3 mx-5 text-white" href="{% url 'home' %}">HOME</a></li>
+                            <li><a class="mt-3 mx-5 text-white" href="{% url 'jobs_view' %}">JOBS</a></li>
+                            <li><a class="mt-3 mx-5 text-white" href="{% url 'status' %}">STATUS</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="d-flex flex-row-reverse flex-grow-1">
+                <nav class="">
+                    <div class="dropdown dropleft show">
+                        <div class="d-flex flex-row">
+                            <!-- account profile -->
+                            <div class="btn-group dropleft">
+                                <img class="p-2 account-image rounded-circle m-auto d-block dropdown-toggle" id="id_profile_links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{request.user.applicant.get_profile_pic.url}}" alt="default account logo" width="45" height="45">
+                                <div class="dropdown-menu" aria-labelledby="id_profile_links">
+                                    <a class="dropdown-item" href="{% url 'account_profile' %}">Account</a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <!-- PC devices -->
+        <div class="d-none d-md-flex flex-row my-auto flex-grow-1 align-items-center">
+            <img class="mx-auto mt-1" src="{% static 'images/logo.png' %}" alt="JobforYoulogo" width="280" height="50">
+            <div class="p-2 text-white">
+                <div class="d-flex flex-row">
+                    <nav>
+                        <ul>
+                            <li><a class="mt-3 mx-5 text-white" href="{% url 'home' %}">HOME</a></li>
+                            <li><a class="mt-3 mx-5 text-white" href="{% url 'add_jobs' %}">ADD JOBS</a></li>
+                            <li><a class="mt-3 mx-5 text-white" href="{% url 'posted_job' %}">POSTED</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="d-flex flex-row-reverse flex-grow-1">
+                <nav>
+                    <div class="dropdown dropleft">
+                        <div class="d-flex flex-row">
+                            <!-- account profile -->
+                            <div class="btn-group dropleft">
+                                <img class="account-image rounded-circle m-auto d-block dropdown-toggle" id="id_profile_links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{request.user.company.get_profile_pic.url}}" alt="default account logo" width="35" height="35">
+                                <div class="dropdown-menu" aria-labelledby="id_profile_links">
+                                    <a class="dropdown-item" href="{% url 'account_profile' %}">Account</a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+        <!-- Mobile devices -->
+        <div class="d-flex d-md-none flex-column my-auto flex-grow-1 align-items-center">
+            <img class="mx-auto mt-1" src="{% static 'images/logo.png' %}" alt="JobforYoulogo" width="280" height="50">
+            <div class="p-2 text-white">
+                <div class="d-flex flex-row">
+                    <nav>
+                        <ul>
+                            <li><a class="mt-3 mx-5 text-white" href="{% url 'home' %}">HOME</a></li>
+                            <li><a class="mt-3 mx-5 text-white" href="{% url 'add_jobs' %}">ADD JOBS</a></li>
+                            <li><a class="mt-3 mx-5 text-white" href="{% url 'posted_job' %}">POSTED</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="d-flex flex-row-reverse flex-grow-1">
+                <nav class="">
+                    <div class="dropdown dropleft show">
+                        <div class="d-flex flex-row">
+                            <!-- account profile -->
+                            <div class="btn-group dropleft">
+                                <img class="p-2 account-image rounded-circle m-auto d-block dropdown-toggle" id="id_profile_links" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{request.user.company.get_profile_pic.url}}" alt="default account logo" width="45" height="45">
+                                <div class="dropdown-menu" aria-labelledby="id_profile_links">
+                                    <a class="dropdown-item" href="{% url 'account_profile' %}">Account</a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+        {% endif %}
+
+        {% else %}
+
+        <!-- PC devices -->
+        <div class="d-none d-md-flex flex-row my-auto flex-grow-1 align-items-center">
+            <img class="mx-auto mt-1" src="{% static 'images/logo.png' %}" alt="JobforYoulogo" width="280" height="50">
+        <div class="p-2 text-white">
+            <div class="d-flex flex-row">
+                <nav>
+                    <ul>
+                        <li><a class="mt-3 mx-5 text-white" href="#homesection">HOME</a></li>
+                        <li><a class="mt-3 mx-5 text-white" href="#AboutUs">ABOUT</a></li>
+                        <li><a class="mt-3 mx-5 text-white" href="#ContactUs">CONTACT</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse flex-grow-1">
+            <div class="d-flex flex-row">
+                <a class="p-2 mt-2 text-white" href="{% url 'login' %}">Login</a>
+                <a class="btn btn-lg btn-outline-primary mx-3" href="{% url 'register' %}"><span class="glyphicon glyphicon-log-in"></span> Register</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile devices -->
+    <div class="d-flex d-md-none flex-column my-auto flex-grow-1 align-items-center">
+            <img class="mx-auto mt-1" src="{% static 'images/logo.png' %}" alt="JobforYoulogo" width="200">
+            <div class="d-flex flex-row-reverse flex-grow-1">
+                <div class="d-flex flex-column">
+                    <a class="p-2 mx-3 mt-2 text-center text-small text-white" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-lg btn-outline-primary" href="{% url 'register' %}"><span class="glyphicon glyphicon-log-in"></span> Register</a>
+                    <div class="d-flex flex-row-reverse flex-grow-3">
+                        <div class="d-flex flex-row">
+                            <a class="mt-3 mx-3 text-white" href="#homesection">HOME</a>
+                            <a class="mt-3 mx-3 text-white" href="#AboutUs">ABOUT</a>
+                            <a class="mt-3 mx-3 text-white" href="#ContactUs">CONTACT</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+</header>

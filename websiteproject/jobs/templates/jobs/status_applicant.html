@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    a {
+        color: black;
+    }
+    a:hover {
+        color: crimson;
+    }
+    .card-body {
+        background-color: rgb(255, 255, 255);
+        margin-bottom: 30px;
+        margin-top: 20px;
+    }
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    .button2 {
+        background-color: transparent;
+        color: white;
+        border: 2px solid crimson;
+    }
+    .button2:hover {
+        background-color: crimson;
+        color: white;
+    }
+    .btn {
+        border-radius: 7px;
+    }
+    .text {
+        color: #9a5cff;
+        margin-left: 30px;
+    }
+</style>
+
+<div class="landing">
+    <div class="job-wrap">
+        <div class="job-inner">
+        </div>
+    </div>
+    <div class="job text-center mt-5">
+        <h2>CHECK YOUR STATUS</h2>
+        <a class='button button2' href="{% url 'contact' %}" role="button">CONTACT US</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <h2 class="text-white mx-5 mt-5 mb-5">Job Selections</h2>
+    <form method="get" class="text">
+        {{myFilter.form}}
+        <button class="btn btn-info" type="submit">Search</button>
+    </form>
+    <div class="mx-5 card card-body">
+        <table class="table table-sm">
+            <tr>
+                <th>Position</th>
+                <th>Applicant</th>
+                <th>Status</th>
+                <th>Feedback</th>
+            </tr>
+            {% for job in status %}
+            <tr>
+                <td>{{ job.get_job }}</td>
+                <td>{{ job.get_applicant }}</td>
+                <td>{{ job.get_status }}</td>
+                <td>{{ job.get_feedback }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+    })
+</script>
+{% endblock content %}

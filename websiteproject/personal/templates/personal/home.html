@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+    {% if request.user.get_applicant == True %}
+        <div id="homesection">
+            <div class="landing">
+                <div class="home-wrap">
+                    <div class="home-inner">
+                    </div>
+                </div>
+            </div>
+            <div class="caption text-center mt-5">
+                <h1>Welcome to JobforYou</h1>
+                <h3>{{username}}</h3>
+                <button class="button button1"><a href="{% url 'jobs_view' %}">Get Started</a></button>
+            </div>
+        </div>
+    {% else %}
+        <div id="homesection">
+            <div class="landing">
+                <div class="home-wrap">
+                    <div class="home-inner">
+                    </div>
+                </div>
+            </div>
+            <div class="caption text-center mt-5">
+                <h1>Welcome to JobforYou</h1>
+                <h3>{{username}}</h3>
+            </div>
+        </div>
+    {% endif %}
+{% else %}
+    <div id="homesection">
+        <div class="landing">
+            <div class="home-wrap">
+                <div class="home-inner">
+                </div>
+            </div>
+        </div>
+        <div class="caption text-center mt-5">
+            <h1>Welcome to JobforYou</h1>
+            <h2>Get Your Dream Job With Us</h2>
+        </div>
+    </div>
+{% endif %}
+<div id="AboutUs" class="offset">
+    <div class="col-12 narrow text-center">
+        <h1>What is JobforYou?</h1>
+        <p>We're the JobforYou and we've been helping people get employed since 2020. With JobforYou, we believe in not only provide you to explore a lot of available job vacancies
+            but also help you in getting employed. In fact, we have helped more than 5 thousand people in getting a job. We would be honored to assist you through this journey.
+            With JobforYou, you can achieve anything.</p>
+    </div>
+</div>
+
+
+
+<div id="ContactUs" class="offset">
+    <div class="jumbotron">
+        <div class="narrow">
+            <div class="col-12 text-center">
+                <h1 class="heading">GET IN TOUCH WITH US</h1>
+                <div class="heading-underline"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="serv-content">
+            <div class="col-md-4 mb-2">
+                <div class="contactus">
+                    <div class="card">
+                        <div class="box">
+                            <i class="fa fa-phone mt-5" style="font-size:70px"></i>
+                            <div class="text">
+                                <h3 class="mt-5">CONTACT US</h3>
+                                <p class="mt-5">Phone number: 5427-8902</p>
+                                <p class="mt-4">Email: jobforyou@gmail.com</p>
+                                <p class="mt-4">Instagram: @jobforyou_official</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contactus">
+                    <div class="card">
+                        <div class="box">
+                            <i class="fa fa-map-marker mt-3" style="font-size:65px"></i>
+                            <div class="text">
+                                <h3 class="mt-4">ADDRESS</h3>
+                                <p class="mt-4">Jakarta Selatan</p>
+                                <p class="mt-2">Jl. Hang Lekir I No.6, RT.1/RW.6, Senayan, Jakarta 10279</p>
+                                <p class="mt-4">Jakarta Utara</p>
+                                <p class="mt-2">Jalan Raya Kelapa Hybrida QG20, RT.12/RW.11, Klp. Gading Bar., Kec. Klp. Gading, Kota Jkt Utara 14240</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contactus">
+                    <div class="card">
+                        <div class="box">
+                            <div class="center mt-5">
+                                <i class="fa fa-clock-o mt-5" style="font-size:100px"></i>
+                                <div class="text">
+                                    <h3 class="mt-5">24 HOURS SERVICE</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+    })
+    setTimeout(function(){
+        if ($('#msg').length > 0) {
+            $('#msg').remove();
+        }
+    }, 2000)
+</script>
+{% endblock content %}

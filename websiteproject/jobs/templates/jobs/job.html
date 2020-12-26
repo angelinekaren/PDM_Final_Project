@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    a {
+        color: black;
+    }
+    a:hover {
+        color: crimson;
+    }
+    .card-body {
+        background-color: rgb(255, 255, 255);
+        margin-bottom: 30px;
+    }
+    .text {
+        color: #9a5cff;
+        margin-left: 30px;
+        margin-bottom: 15px;
+    }
+</style>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" id="msg" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="landing">
+    <div class="job-wrap">
+        <div class="job-inner">
+        </div>
+    </div>
+    <div class="job text-center mt-5">
+        <h2>WELCOME TO THE JOBS BOARD </h2>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <h2 class="text-white mx-5 mt-5 mb-5">Job Selections</h2>
+    <form method="get" class="text">
+        {{myFilter.form}}
+        <button class="btn btn-info" type="submit">Search</button>
+    </form>
+    <div class="mx-5 card card-body">
+        <table class="table table-sm">
+            <tr>
+                <th>Position</th>
+                <th>Job</th>
+            </tr>
+            {% for job in job %}
+            <tr>
+                <td>{{ job.get_position_name }}</td>
+                <td>{{ job.get_company }}</td>
+                <td><a class='btn btn-success' href="/jobs/{{ job.id }}" role="button">FIND MORE</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+    })
+    setTimeout(function(){
+        if ($('#msg').length > 0) {
+            $('#msg').remove();
+        }
+    }, 2000)
+</script>
+{% endblock content %}

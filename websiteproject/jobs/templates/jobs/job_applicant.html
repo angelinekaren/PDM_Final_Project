@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% block title %}
+    Applicants
+{% endblock %}
+{% load static %}
+
+{% block content %}
+    <style type="text/css">
+        .post {
+            margin-top: 90px;
+            color: white;
+            text-align: center;
+        }
+        .pagination {
+            margin-top: 100vh;
+        }
+        .image {
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+        .positions h3{
+		    color: #fff;
+		    margin-top: 80px;
+		}
+
+		.card-body {
+            background-color: rgb(255, 255, 255);
+            margin-bottom: 30px;
+        }
+
+		.btn:hover {
+			opacity: 1;
+			color: crimson;
+		}
+		.button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 20px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            margin-left: 50px;
+        }
+        .button1 {
+            background-color: transparent;
+            color: white;
+            border: 2px solid crimson;
+        }
+        .button1:hover {
+            background-color: crimson;
+            color: white;
+        }
+        .text {
+            color: red;
+        }
+        .btn {
+            margin-left: 50px;
+        }
+        .btn:hover {
+            background-color: danger;
+            color: white;
+        }
+        .icon {
+            color: white;
+        }
+        .icon:hover {
+            color: crimson;
+        }
+        h3 {
+            margin-left: 80px;
+            margin-top: 60px;
+        }
+
+	</style>
+    <section class="bg-light-gray">
+        <div class="container mt-5">
+            <div class="row mt-5">
+                <div class="post col-md mx-auto">
+                    <h1 class="heading mt-5">Applicants for the <span class="accent">{{ job.get_position_name }} </span> position</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        {% if assign_job %}
+            {% for applicant in assign_job %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md">
+                        <div class="box applicant">
+                            <a class="btn-outline-white-secondary btn-sm icon">
+                                <i class="fa fa-envelope"></i> Applicant
+                            </a>
+                            <p>
+                                <a href=""><span class="badge badge-info">{{ applicant.applicant.get_name }} has applied</span></a>
+                            </p>
+                            <div class="d-flex justify-content-left">
+                                <p class="intro"></p>
+                                <div class="image">
+                                    <img src="{% static 'images/profile_pic.png' %}" alt="" height="100" width="100"
+                                         class="img-fluid rounded-circle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="positions">
+                            <h3>----- APPLICANTS PROFILE -----</h3>
+                            <div class="card card-body">
+                                <table class="table table-sm">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Age</th>
+                                        <th>Mobile Phone</th>
+                                        <th>City</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ applicant.applicant.get_name }}</td>
+                                        <td>{{ applicant.applicant.get_gender }}</td>
+                                        <td>{{ applicant.applicant.get_age }}</td>
+                                        <td>{{ applicant.applicant.get_mobile_phone }}</td>
+                                        <td>{{ applicant.applicant.get_city }}</td>
+                                    </tr>
+                                </table>
+                                <div class="card card-body">
+                                    <h5>Email: {{ applicant.applicant.get_email }}</h5>
+                                </div>
+                                <div class="card card-body">
+                                    <h5>{{ applicant.applicant.get_name }}:</h5><h5 class="text">" {{ applicant.applicant.get_will_relocate }} to relocate "</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form>
+                    <button class='button button1' formaction="/status/{{ applicant.id }}">UPDATE STATUS</button>
+                </form>
+                <a class="button button1 mt-3" href="{% url 'contact_applicants' %}" role="button">Email Applicant</a>
+                {% endfor %}
+                {% if is_paginated %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4 mb-4">
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a href="?page={{ page_obj.previous_page_number }}"
+                                               class="page-link">&laquo;</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link">&laquo;</a>
+                                        </li>
+                                    {% endif %}
+                                    {% for i in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == i %}
+                                            <li class="page-item active">
+                                                <a class="page-link">{{ i }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item">
+                                                <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a href="?page={{ page_obj.next_page_number }}"
+                                               class="page-link">&raquo;</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link">&raquo;</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <h3 class="text-white">No Applicants Applied For This Job</h3>
+            {% endif %}
+            </div>
+        <a class="btn btn-danger mt-5" href="{% url 'delete_job' job.id %}">Delete job</a>
+        </div>
+    </section>
+
+
+
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+    })
+</script>
+{% endblock content %}

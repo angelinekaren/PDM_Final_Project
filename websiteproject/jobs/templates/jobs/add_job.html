@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <style type="text/css">
+    	body {
+			background-color: #d3dde3;
+		}
+        .card-login {
+            width: 600px;
+            height: 540px;
+            margin-top: 150px;
+			margin-bottom: auto;
+			background: #dadfe3;
+			justify-content: center;
+			padding: 10px;
+			box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+			border-radius: 10px;
+		}
+        .input-container {
+    		display: flex;
+  			width: 100%;
+  			margin-bottom: 15px;
+		}
+		.form-control {
+			padding: 0px 12px;
+		}
+        .input-field {
+  			width: 100%;
+  			padding: 10px;
+  			outline: none;
+		}
+        .btn:hover {
+			opacity: 1;
+			color: crimson;
+		}
+
+	</style>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center h-100">
+			<div class="card card-login">
+		  		<div class="card-body">
+                    <form class="form-login" method="post">{% csrf_token %}
+					    <h3 class="text-center font-weight-bold text-dark mb-4">ADD JOB</h3>
+						{% csrf_token %}
+
+					    <div class="input-container">
+    					    <input class="input-field form-control" type="company" placeholder="Company name" name="company" id="inputCompany" required>
+  					    </div>
+
+                        <div class="input-container">
+						    <input type="position_name" name="position_name" id="inputPosition" class="form-control" placeholder="Job position" required>
+					    </div>
+
+                        <div class="input-container">
+						    <input type="text_description" name="text_description" id="inputTextDescription" class="form-control" placeholder="Descriptions" required>
+					    </div>
+
+                        <div class="input-container">
+						    <input type="min_age" name="min_age" id="inputMinimumAge" class="form-control" placeholder="Minimum age" required>
+					    </div>
+
+                        <div class="input-container">
+						    <input type="max_age" name="max_age" id="inputMaximumAge" class="form-control" placeholder="Maximum age" required>
+					    </div>
+
+                        <div class="input-container">
+                        	<select type="gender" name="gender" id="inputGender" class="form-control">
+                        		<option value="Male">
+                        		Male</option>
+                        		<option value="Female">
+								Female</option>
+                                <option value="Not specified">
+								Not specified</option>
+                        	</select>
+                  		</div>
+
+                        <div class="input-container">
+                            <input type="salary" name="salary" id="inputSalary" class="form-control" placeholder="Salary (Rp.)" required>
+					    </div>
+
+                        {% for field in job_form %}
+				        <p>
+				        {% for error in field.errors %}
+				        <p style="color: red">{{ error }}</p>
+				        {% endfor %}
+				        </p>
+				        {% endfor %}
+				        {% if job_form.non_field_errors %}
+				        <div style="color: red">
+				        	<p>{{job_form.non_field_errors}}</p>
+				        </div>
+
+				        {% endif %}
+
+                        <button class="btn btn-lg btn-dark btn-block mt-4" type="submit">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    window.addEventListener("scroll", function(){
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+    })
+</script>
+{% endblock %}

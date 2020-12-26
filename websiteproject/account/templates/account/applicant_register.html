@@ -1,0 +1,150 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>I2PFinalProjectKaren</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+</head>
+<body>
+    <style type="text/css">
+    	body {
+			background-color: #d3dde3;
+		}
+        .card-login {
+            width: 450px;
+            height: 750px;
+            margin-top: 30px;
+			margin-bottom: auto;
+			background: #dadfe3;
+			justify-content: center;
+			padding: 10px;
+			box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+			border-radius: 10px;
+		}
+        .input-container {
+    		display: flex;
+  			width: 100%;
+  			margin-bottom: 10px;
+		}
+		.form-control {
+			padding: 0px 12px;
+		}
+        .input-field {
+  			width: 100%;
+  			padding: 10px;
+  			outline: none;
+		}
+		.icon {
+  			padding: 10px;
+  			background: #373c3d;
+  			color: white;
+  			min-width: 40px;
+  			text-align: center;
+  			border-radius: 2px;
+		}
+        .btn:hover {
+			opacity: 1;
+			color: #fff;
+		}
+	</style>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center h-100">
+			<div class="card card-login">
+		  		<div class="card-body">
+                     <form class="form-login" method="post" novalidate>
+						{% csrf_token %}
+					    <div class="d-flex flex-column">
+					        <img class="mx-auto mt-4" src="{% static 'images/logo2.png' %}" alt="JobforYoulogo" width="280" height="75">
+					    </div>
+					    <h3 class="text-center font-weight-bold text-dark mb-4">SIGN UP</h3>
+
+                        <div class="input-container">
+						    <i class="fa fa-user icon"></i>
+    					    <input class="input-field form-control" type="username" placeholder="Username" name="username" id="inputUsername" required autofocus>
+  					    </div>
+
+                        <div class="input-container">
+						    <i class="fa fa-at icon"></i>
+						    <input class="input-field form-control" type="email" name="email" id="inputEmail" placeholder="Email" required>
+					    </div>
+
+					    <div class="input-container">
+						    <i class="fa fa-edit icon"></i>
+						    <input class="input-field form-control" type="name" name="name" id="inputName" placeholder="Name" required>
+					    </div>
+
+
+                         <div class="input-container">
+						    <i class="fa fa-user-o icon"></i>
+						    <input class="input-field form-control" type="age" name="age" id="inputAge" placeholder="Age" required>
+					    </div>
+
+                        <div class="input-container">
+                        	<select type="gender" name="gender" id="gender" class="form-control">
+                        		<option value="Male">
+                        		Male</option>
+                        		<option value="Female">
+								Female</option>
+                        	</select>
+                  		</div>
+
+                        <div class="input-container">
+						    <i class="fa fa-phone icon"></i>
+						    <input class="input-field form-control" type="mobile_phone" name="mobile_phone" id="inputMobilePhone" placeholder="Mobile phone" required>
+					    </div>
+
+                        <div class="input-container">
+						    <i class="fa fa-map-o icon"></i>
+						    <input type="city" name="city" id="inputCity" class="form-control" placeholder="City" required>
+					    </div>
+
+                        <div class="input-container">
+                            <select type="will_relocate" name="will_relocate" id="will_relocate" class="form-control">
+                                <option value="I'm willing">
+                                I'm willing to relocate</option>
+                                <option value="I'm not willing">
+                                I'm not willing to relocate</option>
+                            </select>
+                        </div>
+
+						<div class="input-container">
+						    <i class="fa fa-key icon"></i>
+						    <input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
+					    </div>
+
+                        <div class="input-container">
+						    <i class="fa fa-key icon"></i>
+						    <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm password" required>
+					    </div>
+
+                        {% for field in form %}
+				        <p>
+				        {% for error in field.errors %}
+				        <p style="color: red">{{ error }}</p>
+				        {% endfor %}
+				        </p>
+				        {% endfor %}
+				        {% if form.non_field_errors %}
+				        <div style="color: red">
+				        	<p>{{form.non_field_errors}}</p>
+				        </div>
+
+				        {% endif %}
+
+                        <button class="btn btn-lg btn-dark btn-block mt-4" type="submit">Sign Up</button>
+
+                        <p class="mt-4 text-center">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

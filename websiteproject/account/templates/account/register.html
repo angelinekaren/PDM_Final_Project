@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>I2PFinalProjectKaren</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <style type="text/css">
+    	body {
+			background-color: #d3dde3;
+		}
+        .card-login {
+            width: 400px;
+            height: 300px;
+            margin-top: 200px;
+			margin-bottom: auto;
+			background: #dadfe3;
+			justify-content: center;
+			padding: 10px;
+			box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+			border-radius: 10px;
+		}
+        a {
+            font-size: 20px;
+            color: white;
+
+        }
+        a:hover {
+            color: crimson;
+        }
+	</style>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center h-100">
+			<div class="card card-login">
+		  		<div class="card-body">
+                    <div class="d-flex flex-column">
+                        <img class="mx-auto mt-4" src="{% static 'images/logo2.png' %}" alt="JobforYoulogo" width="280" height="75">
+                    </div>
+                    <h3 class="text-center font-weight-bold text-dark mb-4">REGISTER</h3>
+                    <div class="row">
+                        <div class="col-lg-6 mt-3">
+                            <a href="{% url 'company_register' %}">I am a company</a>
+                        </div>
+                        <div class="col-lg-6 mt-3">
+                            <a href="{% url 'applicant_register' %}">I am an applicant</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
