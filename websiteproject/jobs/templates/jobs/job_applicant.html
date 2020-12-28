@@ -102,7 +102,7 @@
                             <div class="d-flex justify-content-left">
                                 <p class="intro"></p>
                                 <div class="image">
-                                    <img src="{% static 'images/profile_pic.png' %}" alt="" height="100" width="100"
+                                    <img src="{{applicant.applicant.get_profile_pic.url}}" alt="" height="200" width="200"
                                          class="img-fluid rounded-circle">
                                 </div>
                             </div>
