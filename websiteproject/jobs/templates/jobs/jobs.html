@@ -6,60 +6,36 @@
     	body {
 			background-color: #000;
 		}
-        .card-login {
-            width: 800px;
-            height: 130px;
-            margin-top: 20px;
-			margin-bottom: 50px;
-			background: #c5c6eb;
-			margin-left: 20px;
-			padding: 25px;
-			box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-			border-radius: 10px;
-			color: white;
-		}
 		.card-box {
 			margin-bottom: 100px;
-			background: rgb(255, 229, 229);
+			background: #fff;
 			box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 			border-radius: 5px;
 			color: black;
 			padding: 20px;
-		}
-
-        .form-control {
-			padding: 0px 12px;
-		}
-        .input-container {
-    		display: flex;
-  			width: 100%;
-  			margin-bottom: 15px;
-		}
-        .input-field {
-  			width: 100%;
-  			padding: 10px;
-  			outline: none;
+			margin-top: 250px;
 		}
 		.btn:hover {
 			opacity: 1;
-			color: crimson;
+			color: white;
+			background: crimson;
 		}
 		.positions h2{
-		    color: #fff;
-		    text-align: center;
-		    margin-top: 250px;
-		    margin-bottom: 50px;
-		}
-		.positions h4{
-		    margin-left: 50px;
-		    margin-top: 20px;
-		    color: black;
+		    color: #000;
 		    text-align: left;
-
+		    margin-bottom: 20px;
 		}
 		.place h3 {
 		    text-align: center;
 		}
+		.btn  {
+		  margin-top: 20px;
+		}
+		.card-body {
+            background-color: rgb(255, 255, 255);
+            margin-bottom: 30px;
+        }
+
 
     </style>
     <div id="content">
@@ -67,8 +43,15 @@
     </div>
     <div class="col-md">
       <div class="positions">
-        <h2>----- {{ jobs.get_position_name }} at {{ jobs.get_company }} -----</h2>
           <div class="card-box">
+            <form action="/jobs/{{ jobs.id }}/subscribe" method="POST">
+            {% csrf_token %}
+              <input type="hidden" name="job" value="{{ jobs.id }}">
+
+              <input type="submit" class="btn btn-md btn-success pull-right" value="Apply to this Job" />
+
+            </form>
+            <h2>{{ jobs.get_position_name }} at {{ jobs.get_company }}</h2>
             <table class="table table-sm">
               <tr>
                 <th>POSITION NAME</th>
@@ -76,7 +59,6 @@
                 <th>AGE</th>
                 <th>GENDER</th>
                 <th>SALARY</th>
-                <th>DESCRIPTION</th>
               </tr>
               <tr>
                 <td>{{ jobs.get_position_name }}</td>
@@ -84,32 +66,16 @@
                 <td>{{ jobs.get_age }}</td>
                 <td>{{ jobs.get_gender }}</td>
                 <td>{{ jobs.get_salary }}</td>
-                <td>{{ jobs.get_text_description }}</td>
               </tr>
+              </table>
+              <div class="card card-body">
+                <h5>Description:</h5><h5 class="text"> {{ jobs.get_text_description }}</h5>
+              </div>
           </div>
-        </table>
       </div>
-      <div class="place">
-        <h3 class="justify-content-center text-white mx-5">----- APPLICATIONS -----</h3>
-      </div>
-      <div class="container-fluid">
-          <div class="row justify-content-center h-100">
-			<div class="card card-login">
-                <div class="card-body">
-                  <form action="/jobs/{{ jobs.id }}/subscribe" method="POST">
-                  {% csrf_token %}
-                  <p>Subscribe to this job posting by submitting your profile data</p>
+    </div>
 
-                  <input type="hidden" name="job" value="{{ jobs.id }}">
 
-                  <input type="submit" class="btn btn-md btn-dark btn-block" value="Apply to this Job" />
-
-                </form>
-               </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
 <script type="text/javascript">
     window.addEventListener("scroll", function(){

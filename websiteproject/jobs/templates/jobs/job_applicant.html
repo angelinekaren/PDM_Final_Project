@@ -19,8 +19,8 @@
             margin-left: 30px;
         }
         .positions h3{
-		    color: #fff;
-		    margin-top: 80px;
+		    color: #000;
+		    margin-top: 50px;
 		}
 
 		.card-body {
@@ -65,14 +65,8 @@
             background-color: danger;
             color: white;
         }
-        .icon {
-            color: white;
-        }
-        .icon:hover {
-            color: crimson;
-        }
         h3 {
-            margin-left: 80px;
+            margin-left: 90px;
             margin-top: 60px;
         }
 
@@ -93,44 +87,43 @@
                 <div class="row">
                     <div class="col-md">
                         <div class="box applicant">
-                            <a class="btn-outline-white-secondary btn-sm icon">
+                            <div class="btn-outline-white-secondary btn-sm icon text-white">
                                 <i class="fa fa-envelope"></i> Applicant
-                            </a>
+                            </div>
                             <p>
                                 <a href=""><span class="badge badge-info">{{ applicant.applicant.get_name }} has applied</span></a>
                             </p>
                             <div class="d-flex justify-content-left">
-                                <p class="intro"></p>
-                                <div class="image">
-                                    <img src="{{applicant.applicant.get_profile_pic.url}}" alt="" height="200" width="200"
+                                <div class="card card-body">
+                                    <div class="image">
+                                        <img src="{{applicant.applicant.get_profile_pic.url}}" alt="" height="200" width="200"
                                          class="img-fluid rounded-circle">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="positions">
-                            <h3>----- APPLICANTS PROFILE -----</h3>
-                            <div class="card card-body">
-                                <table class="table table-sm">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Age</th>
-                                        <th>Mobile Phone</th>
-                                        <th>City</th>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ applicant.applicant.get_name }}</td>
-                                        <td>{{ applicant.applicant.get_gender }}</td>
-                                        <td>{{ applicant.applicant.get_age }}</td>
-                                        <td>{{ applicant.applicant.get_mobile_phone }}</td>
-                                        <td>{{ applicant.applicant.get_city }}</td>
-                                    </tr>
-                                </table>
-                                <div class="card card-body">
-                                    <h5>Email: {{ applicant.applicant.get_email }}</h5>
-                                </div>
-                                <div class="card card-body">
-                                    <h5>{{ applicant.applicant.get_name }}:</h5><h5 class="text">" {{ applicant.applicant.get_will_relocate }} to relocate "</h5>
+                                    </div>
+                                    <div class="positions">
+                                    <h3>APPLICANTS PROFILE</h3>
+                                        <table class="table table-sm">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Gender</th>
+                                            <th>Age</th>
+                                            <th>Mobile Phone</th>
+                                            <th>City</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ applicant.applicant.get_name }}</td>
+                                            <td>{{ applicant.applicant.get_gender }}</td>
+                                            <td>{{ applicant.applicant.get_age }}</td>
+                                            <td>{{ applicant.applicant.get_mobile_phone }}</td>
+                                            <td>{{ applicant.applicant.get_city }}</td>
+                                        </tr>
+                                        </table>
+                                        <div class="card card-body">
+                                            <h5>Email: {{ applicant.applicant.get_email }}</h5>
+                                        </div>
+                                        <div class="card card-body">
+                                            <h5>{{ applicant.applicant.get_name }}:</h5><h5 class="text">" {{ applicant.applicant.get_will_relocate }} to relocate "</h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

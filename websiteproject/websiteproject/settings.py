@@ -30,7 +30,6 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
+
 ]
 
 MIDDLEWARE = [
@@ -137,7 +137,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = BASE_DIR / 'static_files'
-MEDIA_ROOT = BASE_DIR / 'media_files'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 #SMTP Configuration
 

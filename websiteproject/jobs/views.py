@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Job, ApplicantsJobMap
-from account.models import Applicant, CustomUser
+from account.models import Applicant, CustomUser, Company
 from django.contrib import messages
 from django.views.generic import ListView
 from .forms import JobForm, StatusForm, JobApplyForm
@@ -22,7 +22,10 @@ def get_jobs(request):
 
 def get_job(request, id):
     jobs = Job.objects.get(pk=id)
-    return render(request, 'jobs/jobs.html', {'jobs': jobs})
+    context = {
+        'jobs': jobs,
+    }
+    return render(request, 'jobs/jobs.html', context)
 
 
 def subscribe_job(request, id):

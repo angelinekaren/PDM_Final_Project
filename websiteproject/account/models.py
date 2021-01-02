@@ -31,6 +31,7 @@ class CustomUser(AbstractUser):
 class Company(models.Model):
     company = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     profile_pic = models.ImageField(default="profile_pic.png", null=True, blank=True)
+    objects = models.Manager()
 
     def __str__(self):
         return str(self.company)
