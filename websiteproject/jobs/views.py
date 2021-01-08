@@ -7,7 +7,7 @@ from .forms import JobForm, StatusForm, JobApplyForm
 from .filters import StatusFilter, JobFilter
 from django.core.mail import send_mail
 
-
+# view all the jobs position available posted by various of company
 def get_jobs(request):
     # get all jobs from the DB
     job = Job.objects.all()
@@ -19,7 +19,7 @@ def get_jobs(request):
     }
     return render(request, 'jobs/job.html', context)
 
-
+# view a single job
 def get_job(request, id):
     jobs = Job.objects.get(pk=id)
     context = {
@@ -27,7 +27,7 @@ def get_job(request, id):
     }
     return render(request, 'jobs/jobs.html', context)
 
-
+# view the form to apply/subscribe to a certain job posting
 def subscribe_job(request, id):
     form = JobApplyForm(request.POST)
     applicant = Applicant.objects.get(applicant_id=request.user.applicant.applicant_id)
@@ -46,7 +46,7 @@ def subscribe_job(request, id):
         messages.error(request, 'You already applied for the Job!')
         return redirect('jobs_view')
 
-
+# view the form for company users to add new jobs position
 def add_job(request):
     if request.method == 'POST':
         form = JobForm(request.POST)
@@ -60,12 +60,12 @@ def add_job(request):
         form = JobForm()
     return render(request, 'jobs/add_job.html', {'job_form': form})
 
-
+# view all the jobs position that are made by the current logged in company user
 def posted_jobs(request):
     posted_job = Job.objects.filter(creator=request.user.company)
     return render(request, 'jobs/posted_job.html', {'posted_job': posted_job})
 
-
+# view all the applicants for that certain job posting
 class job_applicants(ListView):
     model = ApplicantsJobMap
     template_name = "jobs/job_applicant.html"
@@ -83,7 +83,7 @@ class job_applicants(ListView):
         context["job"] = Job.objects.get(id=self.kwargs["id"])
         return context
 
-
+# view the form to delete a certain job posting
 def delete_job(request, pk):
     job = Job.objects.get(id=pk)
     if request.method == 'POST':
@@ -94,7 +94,7 @@ def delete_job(request, pk):
     context = {'item': job}
     return render(request, 'jobs/delete_job.html', context)
 
-
+# a view to update the status of a certain applicant
 def update(request, applicant_id):
     applicants = ApplicantsJobMap.objects.get(id=applicant_id)
     formset = StatusForm(instance=applicants)
@@ -110,7 +110,7 @@ def update(request, applicant_id):
     context = {'formset': formset}
     return render(request, 'jobs/status.html', context)
 
-
+# applicant users to view all the status for jobs that they have applied/subscribed to
 def status(request):
     status_applicant = ApplicantsJobMap.objects.filter(applicant=request.user.applicant)
     myFilter = StatusFilter(request.GET, queryset=status_applicant)
@@ -121,7 +121,7 @@ def status(request):
     }
     return render(request, "jobs/status_applicant.html", context)
 
-
+# view the form for applicant users to contact the admin for the website
 def contact(request):
     if request.method == 'POST':
         message_name = request.POST['message_name']
@@ -140,7 +140,7 @@ def contact(request):
     else:
         return render(request, 'jobs/message.html', {})
 
-
+# view the form for company users to contact the applicant by their gmail
 def contact_applicants(request):
     if request.method == 'POST':
         message_name_applicant = request.POST['message_name_applicant']

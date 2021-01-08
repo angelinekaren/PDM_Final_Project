@@ -2,7 +2,7 @@ from django import forms
 from .models import Job, ApplicantsJobMap
 from account.models import Applicant
 
-
+# form for company users to make new job position
 class JobForm(forms.ModelForm):
 
     class Meta:
@@ -29,6 +29,7 @@ class JobForm(forms.ModelForm):
             jobs.save()
             return jobs
 
+# form for company users to update their applicant status
 class StatusForm(forms.ModelForm):
     applicant = forms.ModelChoiceField(
         queryset=Applicant.objects.all(),
@@ -40,7 +41,7 @@ class StatusForm(forms.ModelForm):
         model = ApplicantsJobMap
         fields = ['applicant', 'job', 'status', 'feedback']
 
-
+# form for applicant users to apply for a job
 class JobApplyForm(forms.ModelForm):
     class Meta:
         model = ApplicantsJobMap

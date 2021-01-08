@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserChangeForm
 
 User = get_user_model()
 
+# sign up form for company user
 class CompanySignUpForm(UserCreationForm):
     name = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=60, help_text='Required. Add a valid email address.')
@@ -53,6 +54,7 @@ class CompanySignUpForm(UserCreationForm):
             raise forms.ValidationError("Passwords must match")
         return data
 
+# sign up form for applicant user
 class ApplicantSignUpForm(UserCreationForm):
     name = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=60, help_text='Required. Add a valid email address.')
@@ -108,6 +110,7 @@ class ApplicantSignUpForm(UserCreationForm):
             raise forms.ValidationError("Passwords must match")
         return data
 
+# form for company user to update their user account
 class CompanyEditProfileForm(UserChangeForm):
     password = None
     class Meta:
@@ -116,6 +119,7 @@ class CompanyEditProfileForm(UserChangeForm):
             'profile_pic',
         )
 
+# form for applicant user to update their user account
 class ApplicantEditProfileForm(UserChangeForm):
     password = None
     class Meta:

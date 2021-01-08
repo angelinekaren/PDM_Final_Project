@@ -6,11 +6,11 @@ from account.forms import (CompanySignUpForm, ApplicantSignUpForm,
                            CompanyEditProfileForm, ApplicantEditProfileForm)
 from django.contrib import messages
 
-
+# view for user to choose whether thay want to be registered as company/applicant
 def register_view(request):
     return render(request, 'account/register.html')
 
-
+# register view for company user
 class company_register(CreateView):
     model = CustomUser
     form_class = CompanySignUpForm
@@ -21,7 +21,7 @@ class company_register(CreateView):
         login(self.request, user)  #if the form is save, the user will be logged in
         return redirect('home')
 
-
+#register view for applicant user
 class applicant_register(CreateView):
     model = CustomUser
     form_class = ApplicantSignUpForm
@@ -32,7 +32,7 @@ class applicant_register(CreateView):
         login(self.request, user)  #if the form is save, the user will be logged in
         return redirect('home')
 
-
+# login view for users
 def login_view(request):
     user = request.user
     if user.is_authenticated:
@@ -51,15 +51,16 @@ def login_view(request):
     return render(request, "account/login.html", {})
 
 
+# for users to logout form their account
 def logout_view(request):
     logout(request)
     return redirect("home")
 
-
+# their user account profile view
 def account_profile(request):
     return render(request, 'account/account_profile.html', {})
 
-
+# view the form to update the account profile for company user
 def company_update_profile(request):
     if request.method == 'POST':
         form = CompanyEditProfileForm(request.POST, request.FILES, instance=request.user.company)
@@ -73,7 +74,7 @@ def company_update_profile(request):
         context = {'update_form': form}
         return render(request, 'account/update_profile.html', context)
 
-
+# view the form to update the account profile for applicant user
 def applicant_update_profile(request):
     if request.method == 'POST':
         form = ApplicantEditProfileForm(request.POST, request.FILES, instance=request.user.applicant)
