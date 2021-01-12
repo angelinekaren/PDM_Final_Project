@@ -98,15 +98,16 @@ def delete_job(request, pk):
 def update(request, applicant_id):
     applicants = ApplicantsJobMap.objects.get(id=applicant_id)
     formset = StatusForm(instance=applicants)
+    # HTTP method POST -> forms submitted by a user
     if request.method == 'POST':
-        formset = StatusForm(request.POST, instance=applicants)
-        if formset.is_valid():
+        formset = StatusForm(request.POST, instance=applicants) # a form bound to the POST data
+        if formset.is_valid(): # if all the validation rules has passed
             formset = formset.save(commit=False)
             formset.save()
             messages.success(request, 'Applicant status update successful')
             return redirect('posted_job')
     else:
-        formset = StatusForm(instance=applicants)
+        formset = StatusForm(instance=applicants) # display the forms, so it could be filled
     context = {'formset': formset}
     return render(request, 'jobs/status.html', context)
 
