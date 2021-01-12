@@ -3,6 +3,7 @@ from account.models import CustomUser, Company, Applicant
 from django.contrib.auth.admin import UserAdmin
 from jobs.models import ApplicantsJobMap
 
+# create a tabular inline inside the applicants admin (can only be seen by superuser)
 class CandidateInline(admin.TabularInline):
     model = ApplicantsJobMap
 
@@ -10,6 +11,7 @@ class CandidateInline(admin.TabularInline):
         if request.user.is_superuser:
             return ['job', 'status', 'feedback']
 
+# specify the user with permission to view the applicants admin
 class ApplicantsAdmin(admin.ModelAdmin):
     inlines = (CandidateInline,)
 
@@ -25,6 +27,7 @@ class ApplicantsAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         return request.user.is_superuser
 
+# specify display fields and filter inside the account admin
 class AccountAdmin(UserAdmin):
     list_display = ("email", "username", "date_joined", "last_login", "is_staff")
     search_fields = ("email", "username")

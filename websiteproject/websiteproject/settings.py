@@ -139,7 +139,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'static_files'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-#SMTP Configuration
+# SMTP Configuration
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
